@@ -61,6 +61,38 @@ async function ready(client: ExtendedClient): Promise<void> {
         },
       ],
     },
+    {
+      name: "medicine",
+      description: "Générer un post de médicament manuellement (pour tester)",
+    },
+    {
+      name: "eponym",
+      description: "Générer un post d'éponyme médical manuellement (pour tester)",
+    },
+    {
+      name: "quizz",
+      description: "Lancer un quiz médical interactif",
+      options: [
+        {
+          type: ApplicationCommandOptionType.String,
+          name: "sujet",
+          description: "Le sujet du quiz (ex: cardiologie, pharmacologie...)",
+          required: true,
+        },
+        {
+          type: ApplicationCommandOptionType.String,
+          name: "difficulte",
+          description: "Niveau de difficulté du quiz",
+          required: true,
+          choices: [
+            { name: "Facile", value: "facile" },
+            { name: "Normal", value: "normal" },
+            { name: "Difficile", value: "difficile" },
+            { name: "EDN", value: "edn" },
+          ],
+        },
+      ],
+    },
   ];
 
   try {

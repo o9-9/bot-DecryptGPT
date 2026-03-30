@@ -111,3 +111,6 @@ config.ts
 channels.ts
 package-lock.json
 bun.lock
+
+# Medicine posts data
+data/

@@ -3,6 +3,9 @@ import type { Interaction, Client } from "discord.js";
 import gptModel from "../commands/gpt-model.js";
 import imageGpt from "../commands/image-gpt.js";
 import imageEdit from "../commands/image-edit.js";
+import { execute as medicineCommand } from "../commands/medicine.js";
+import { execute as eponymCommand } from "../commands/eponym.js";
+import { execute as quizzCommand } from "../commands/quizz.js";
 import handleInteractionError from "../utils/handleInteractionError.js";
 
 type CommandHandler = (interaction: any, client: any) => Promise<void>;
@@ -11,6 +14,9 @@ const commandHandlers: Record<string, CommandHandler> = {
   "model": gptModel,
   "image": imageGpt,
   "image-edit": imageEdit,
+  "medicine": medicineCommand,
+  "eponym": eponymCommand,
+  "quizz": quizzCommand,
 };
 
 async function interactionCreate(interaction: Interaction, client: Client): Promise<void> {

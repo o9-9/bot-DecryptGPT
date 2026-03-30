@@ -6,12 +6,9 @@ import { DEFAULT_MODEL } from "./config.js";
 import interactionCreate from "./events/interactionCreate.js";
 import messageCreate from "./events/messageCreate.js";
 import ready from "./events/ready.js";
-
-// Extend the Client type to include custom properties
-interface ExtendedClient extends Client {
-  openai: OpenAI;
-  currentModel: string;
-}
+import { initializeMedicinePosts } from "./features/medicinePosts.js";
+import { initializeEponymPosts } from "./features/eponymPosts.js";
+import type { ExtendedClient } from "./types/ExtendedClient.js";
 
 const client = new Client({
   intents: [
@@ -31,7 +28,11 @@ client.openai = new OpenAI({
 
 client.currentModel = DEFAULT_MODEL;
 
-client.on("ready", () => ready(client));
+client.on("ready", () => {
+  ready(client);
+  initializeMedicinePosts(client);
+  initializeEponymPosts(client);
+});
 client.on("messageCreate", (message) => messageCreate(message, client));
 client.on("interactionCreate", (interaction) =>
   interactionCreate(interaction, client)
